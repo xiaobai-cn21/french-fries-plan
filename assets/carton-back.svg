@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 442 487" fill="none">
+  <defs>
+    <linearGradient id="inside" x1="229" y1="190" x2="229" y2="322" gradientUnits="userSpaceOnUse"><stop stop-color="#be3520"/><stop offset=".35" stop-color="#86200e"/><stop offset="1" stop-color="#e94724"/></linearGradient>
+  </defs>
+  <path d="M82 203Q219 171 374 201L345 390 110 392Z" fill="url(#inside)"/>
+  <path d="M83 203Q220 173 373 201" stroke="#ff926b" stroke-width="5" stroke-linecap="round"/>
+</svg>

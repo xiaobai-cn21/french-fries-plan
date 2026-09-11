@@ -9,8 +9,46 @@ const state = {
   paused: false,
   remaining: 0,
   total: 0,
+  fries: JSON.parse(localStorage.getItem("fryplan-fries") || "null") || [
+    {
+      task: "整理第三章第一篇参考文献",
+      duration: 15,
+      difficulty: "低",
+    },
+    {
+      task: "复习 10 个高频错题单词",
+      duration: 15,
+      difficulty: "低",
+    },
+    {
+      task: "写出开头 120 字和 3 个小标题",
+      duration: 20,
+      difficulty: "低",
+    },
+    {
+      task: "把今天最重要的目标拆成 3 个小步骤",
+      duration: 15,
+      difficulty: "低",
+    },
+    {
+      task: "修改一段已经写好的内容",
+      duration: 20,
+      difficulty: "低",
+    },
+  ],
   history: JSON.parse(localStorage.getItem("fryplan-history") || "[]"),
 };
+
+const debugFries = new URLSearchParams(location.search).get("fries");
+const isDebugFries = debugFries !== null;
+if (isDebugFries) {
+  const debugCount = Math.max(0, Number(debugFries) || 0);
+  state.fries = Array.from({ length: debugCount }, (_, index) => ({
+    task: `测试行动薯条 ${index + 1}`,
+    duration: index % 3 === 0 ? 20 : 15,
+    difficulty: "低",
+  }));
+}
 
 const templates = {
   "完成毕业论文": {
@@ -30,6 +68,23 @@ const templates = {
   },
 };
 
+const fryLayouts = [
+  // Coordinates follow the reference's 442 × 487 scene, from back to front.
+  { x: 45, bottom: 208, height: 218, width: 62, tilt: -5, layer: 1 },
+  { x: 55, bottom: 210, height: 218, width: 62, tilt: 5, layer: 1 },
+  { x: 60, bottom: 212, height: 194, width: 60, tilt: 12, layer: 2 },
+  { x: 39, bottom: 209, height: 187, width: 61, tilt: -12, layer: 2 },
+  { x: 50, bottom: 211, height: 190, width: 62, tilt: 0, layer: 3 },
+  { x: 33, bottom: 205, height: 158, width: 56, tilt: -15, layer: 3 },
+  { x: 64, bottom: 212, height: 170, width: 59, tilt: 12, layer: 4 },
+  { x: 68, bottom: 209, height: 165, width: 58, tilt: 18, layer: 4 },
+  { x: 45, bottom: 191, height: 175, width: 62, tilt: -5, layer: 5 },
+  { x: 36, bottom: 191, height: 156, width: 60, tilt: -11, layer: 6 },
+  { x: 54, bottom: 192, height: 173, width: 62, tilt: 3, layer: 6 },
+  { x: 61, bottom: 190, height: 158, width: 60, tilt: 12, layer: 7 },
+  { x: 47, bottom: 186, height: 149, width: 62, tilt: -8, layer: 8 },
+];
+
 const els = {
   energyText: document.querySelector("#energyText"),
   doneCount: document.querySelector("#doneCount"),
@@ -37,6 +92,7 @@ const els = {
   bestLength: document.querySelector("#bestLength"),
   buddyLevel: document.querySelector("#buddyLevel"),
   buddyLine: document.querySelector("#buddyLine"),
+  homeBuddy: document.querySelector("#homeBuddy"),
   profileLevel: document.querySelector("#profileLevel"),
   profileNote: document.querySelector("#profileNote"),
   goalInput: document.querySelector("#goalInput"),
@@ -60,6 +116,8 @@ const els = {
   resultCard: document.querySelector("#resultCard"),
   scoreText: document.querySelector("#scoreText"),
   fuelText: document.querySelector("#fuelText"),
+  frySlot: document.querySelector("#frySlot"),
+  overflowBadge: document.querySelector("#overflowBadge"),
   historyList: document.querySelector("#historyList"),
   insightList: document.querySelector("#insightList"),
 };
@@ -67,6 +125,10 @@ const els = {
 function showScreen(name) {
   screens.forEach((screen) => screen.classList.toggle("active", screen.dataset.screen === name));
   bottomButtons.forEach((button) => button.classList.toggle("active", button.dataset.nav === name));
+  if (name === "home") {
+    renderBuddyFries();
+    renderHome();
+  }
   if (name === "warehouse") renderHistory();
   if (name === "profile") renderProfile();
 }
@@ -75,10 +137,15 @@ function saveHistory() {
   localStorage.setItem("fryplan-history", JSON.stringify(state.history));
 }
 
+function saveFries() {
+  localStorage.setItem("fryplan-fries", JSON.stringify(state.fries));
+}
+
 function renderHome() {
   const done = state.history.length;
   const totalReward = state.history.reduce((sum, item) => sum + item.reward, 0);
   const level = getLevel(done);
+  const available = state.fries.length;
   state.energy = 20 + totalReward;
   els.energyText.textContent = state.energy;
   els.doneCount.textContent = done;
@@ -86,7 +153,55 @@ function renderHome() {
   els.bestLength.textContent = done > 1 ? "15分" : "20分";
   els.buddyLevel.textContent = level;
   els.profileLevel.textContent = level;
-  els.buddyLine.textContent = done > 0 ? "上一根薯条已经成熟，下一根可以更小一点。" : "今天先做一根最容易开始的薯条。";
+  if (available === 0) {
+    els.buddyLine.textContent = "薯条盒空了，先去创建一根新的行动薯条。";
+  } else if (done > 0) {
+    els.buddyLine.textContent = `还有 ${available} 根行动薯条，点一根继续加热。`;
+  } else {
+    els.buddyLine.textContent = `${available} 根行动薯条正在等你，点一根开始。`;
+  }
+}
+
+function renderBuddyFries() {
+  const visibleLimit = fryLayouts.length;
+  const count = Math.min(state.fries.length, visibleLimit);
+  const planIndexes = Array.from({ length: count }, (_, index) => index);
+  els.homeBuddy.classList.toggle("empty", state.fries.length === 0);
+  els.homeBuddy.classList.toggle("few", state.fries.length > 0 && state.fries.length <= 3);
+  els.homeBuddy.classList.toggle("crowded", state.fries.length >= 8);
+  els.homeBuddy.setAttribute("aria-label", `薯条伙伴：${state.fries.length} 根可用行动薯条`);
+  els.frySlot.innerHTML = "";
+  els.overflowBadge.textContent = state.fries.length > visibleLimit ? `+${state.fries.length - visibleLimit}` : "";
+  els.overflowBadge.classList.toggle("visible", state.fries.length > visibleLimit);
+  planIndexes.forEach((planIndex, index) => {
+    const plan = state.fries[planIndex];
+    const layout = getFryLayout(count, index);
+    const fry = document.createElement("button");
+    fry.className = "fry";
+    fry.type = "button";
+    fry.textContent = "1";
+    fry.dataset.randomFry = "";
+    fry.dataset.planIndex = String(planIndex);
+    fry.setAttribute("aria-label", `抽取行动薯条：${plan.task}`);
+    fry.style.setProperty("--fry-x", `${layout.x}%`);
+    fry.style.setProperty("--fry-bottom", `${layout.bottom / 487 * 100}%`);
+    fry.style.setProperty("--fry-height", `${layout.height / 487 * 100}%`);
+    fry.style.setProperty("--fry-width", `${layout.width / 442 * 100}%`);
+    fry.style.setProperty("--fry-tilt", `${layout.tilt}deg`);
+    fry.style.setProperty("--fry-layer", String(layout.layer));
+    els.frySlot.appendChild(fry);
+  });
+}
+
+function getFryLayout(count, index) {
+  if (count === 1) return fryLayouts[10];
+  if (count === 2) return [fryLayouts[9], fryLayouts[10]][index];
+  if (count === 3) return [fryLayouts[9], fryLayouts[10], fryLayouts[11]][index];
+  if (count < fryLayouts.length) {
+    const spread = [0, 1, 9, 10, 11, 3, 7, 8, 12, 4, 6, 5];
+    return fryLayouts[spread[index]];
+  }
+  return fryLayouts[index];
 }
 
 function getLevel(done) {
@@ -117,14 +232,42 @@ function makePlan(goal) {
   };
 }
 
-function acceptTask() {
-  state.currentTask = {
-    name: els.taskName.value.trim() || "完成一个 15 分钟小步骤",
+function addTaskToFries() {
+  state.fries.unshift({
+    task: els.taskName.value.trim() || "完成一个 15 分钟小步骤",
     duration: Number(els.durationSelect.value),
     difficulty: els.difficultySelect.value,
+  });
+  saveFries();
+  renderBuddyFries();
+  els.actionCard.classList.add("hidden");
+  els.goalInput.value = "";
+  showScreen("home");
+  els.buddyLine.textContent = "新薯条已经加入，点角色上的薯条开始。";
+}
+
+function drawRandomFry(button) {
+  const planIndex = Number(button.dataset.planIndex);
+  const plan = state.fries[planIndex] || state.fries[Math.floor(Math.random() * state.fries.length)];
+  if (!plan) return;
+  document.querySelectorAll("[data-random-fry]").forEach((fry) => fry.classList.remove("selected"));
+  button.classList.add("selected");
+  els.buddyLine.textContent = `抽中了：${plan.task}`;
+  state.currentTask = {
+    name: plan.task,
+    duration: plan.duration,
+    difficulty: plan.difficulty,
   };
-  startTimer(state.currentTask.duration);
-  showScreen("heat");
+  if (Number.isInteger(planIndex) && !isDebugFries) {
+    state.fries.splice(planIndex, 1);
+    saveFries();
+  }
+  setTimeout(() => {
+    button.classList.remove("selected");
+    renderBuddyFries();
+    startTimer(state.currentTask.duration);
+    showScreen("heat");
+  }, 650);
 }
 
 function startTimer(minutes) {
@@ -276,8 +419,13 @@ document.querySelectorAll("[data-template]").forEach((button) => {
   });
 });
 
+els.homeBuddy.addEventListener("click", (event) => {
+  const fry = event.target.closest("[data-random-fry]");
+  if (fry) drawRandomFry(fry);
+});
+
 document.querySelector("#splitTaskBtn").addEventListener("click", splitTask);
-document.querySelector("#acceptTaskBtn").addEventListener("click", acceptTask);
+document.querySelector("#acceptTaskBtn").addEventListener("click", addTaskToFries);
 document.querySelector("#finishBtn").addEventListener("click", finishHeating);
 document.querySelector("#coolBtn").addEventListener("click", coolDown);
 els.pauseBtn.addEventListener("click", () => {
@@ -288,5 +436,6 @@ els.proofInput.addEventListener("change", handleUpload);
 els.verifyBtn.addEventListener("click", verifyResult);
 document.querySelector("#saveResultBtn").addEventListener("click", saveResult);
 
+renderBuddyFries();
 renderHome();
 renderHistory();

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 54 230" fill="none" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="gold" x1="4" y1="80" x2="52" y2="84" gradientUnits="userSpaceOnUse"><stop stop-color="#ffe699"/><stop offset=".17" stop-color="#ffdd7f"/><stop offset=".3" stop-color="#ffd064"/><stop offset=".8" stop-color="#ffc250"/><stop offset="1" stop-color="#e7a035"/></linearGradient>
+    <linearGradient id="shade" x1="24" y1="12" x2="36" y2="230" gradientUnits="userSpaceOnUse"><stop stop-color="#ffcc64" stop-opacity="0"/><stop offset=".65" stop-color="#efaa36" stop-opacity=".12"/><stop offset="1" stop-color="#b46a20" stop-opacity=".58"/></linearGradient>
+    <linearGradient id="side" x1="1" y1="0" x2="14" y2="0" gradientUnits="userSpaceOnUse"><stop stop-color="#fff3c0"/><stop offset=".6" stop-color="#ffe79a"/><stop offset="1" stop-color="#ffc957"/></linearGradient>
+    <linearGradient id="top" x1="24" y1="1" x2="25" y2="9" gradientUnits="userSpaceOnUse"><stop stop-color="#fff7d4"/><stop offset="1" stop-color="#ffda7d"/></linearGradient>
+  </defs>
+  <path d="M3 5 12 1 49 2Q53 2 53 7V224Q53 228 49 229L13 230 3 226Q1 225 1 221V10Q1 6 3 5Z" fill="url(#gold)"/>
+  <path d="M3 6 12 9 14 229 4 226Q1 225 1 221V10Q1 7 3 6Z" fill="url(#side)"/>
+  <path d="M3 5 12 1 49 2Q52 2 53 6L13 10Z" fill="url(#top)"/>
+  <path d="M13 10 53 6V224Q53 228 49 229L14 230Z" fill="url(#shade)"/>
+  <path d="M14 11 15 222" stroke="#fff1b3" stroke-width="1.6" opacity=".65"/>
+  <path d="M50 9V222" stroke="#d68c2b" stroke-width="1.5" opacity=".32"/>
+</svg>

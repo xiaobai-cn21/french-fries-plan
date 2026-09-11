@@ -26,10 +26,10 @@
             <div class="sparkle s1"></div>
             <div class="sparkle s2"></div>
             <div class="fry-buddy" id="homeBuddy">
-              <span class="fry f1"></span>
-              <span class="fry f2"></span>
-              <span class="fry f3"></span>
-              <span class="face">•ᴗ•</span>
+              <div class="fry-slot" id="frySlot"></div>
+              <img class="box-back" src="assets/carton-back.svg" alt="" aria-hidden="true" />
+              <img class="box-body" src="assets/carton-front.svg" alt="" aria-hidden="true" />
+              <span class="overflow-badge" id="overflowBadge"></span>
             </div>
           </div>
           <h2 id="buddyLevel">Lv1 小薯条</h2>
@@ -52,7 +52,6 @@
               <strong id="bestLength">20分</strong>
             </div>
           </div>
-          <button class="primary-button" type="button" data-nav="create">制作今天的第一根薯条</button>
         </section>
       </section>
 
@@ -100,7 +99,7 @@
             </label>
           </div>
           <p id="reasonText">推荐原因：当前最容易启动。</p>
-          <button class="primary-button" type="button" id="acceptTaskBtn">接受并开始加热</button>
+          <button class="primary-button" type="button" id="acceptTaskBtn">加入薯条盒</button>
         </section>
       </section>
 

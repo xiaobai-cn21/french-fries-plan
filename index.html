@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>薯条计划 FryPlan</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="phone-shell">
+      <section class="screen active" id="homeScreen" data-screen="home">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">FryPlan</p>
+            <h1>薯条计划</h1>
+          </div>
+          <button class="icon-button" type="button" data-nav="profile" aria-label="行动画像">◎</button>
+        </header>
+
+        <section class="hero">
+          <div class="stamp-card">
+            <span>今日剩余薯条能量</span>
+            <strong id="energyText">20</strong>
+          </div>
+          <div class="buddy-wrap" aria-label="薯条伙伴">
+            <div class="sparkle s1"></div>
+            <div class="sparkle s2"></div>
+            <div class="fry-buddy" id="homeBuddy">
+              <span class="fry f1"></span>
+              <span class="fry f2"></span>
+              <span class="fry f3"></span>
+              <span class="face">•ᴗ•</span>
+            </div>
+          </div>
+          <h2 id="buddyLevel">Lv1 小薯条</h2>
+          <p id="buddyLine">今天先做一根最容易开始的薯条。</p>
+        </section>
+
+        <section class="paper-panel">
+          <div class="panel-tab">今日状态</div>
+          <div class="stats-grid">
+            <div>
+              <span>成熟薯条</span>
+              <strong id="doneCount">0</strong>
+            </div>
+            <div>
+              <span>连续行动</span>
+              <strong id="streakCount">1天</strong>
+            </div>
+            <div>
+              <span>最佳长度</span>
+              <strong id="bestLength">20分</strong>
+            </div>
+          </div>
+          <button class="primary-button" type="button" data-nav="create">制作今天的第一根薯条</button>
+        </section>
+      </section>
+
+      <section class="screen" id="createScreen" data-screen="create">
+        <header class="topbar compact">
+          <button class="icon-button" type="button" data-nav="home" aria-label="返回">‹</button>
+          <h1>创建薯条</h1>
+          <span class="ghost-space"></span>
+        </header>
+
+        <section class="paper-panel create-panel">
+          <div class="panel-tab">冷冻目标</div>
+          <label class="field-label" for="goalInput">你现在想推进什么？</label>
+          <textarea id="goalInput" rows="5" placeholder="例如：完成毕业论文第三章"></textarea>
+          <div class="quick-chips">
+            <button type="button" data-template="完成毕业论文">毕业论文</button>
+            <button type="button" data-template="准备英语考试">考试复习</button>
+            <button type="button" data-template="写一篇内容草稿">内容创作</button>
+          </div>
+          <button class="primary-button" type="button" id="splitTaskBtn">AI 拆解成行动薯条</button>
+        </section>
+
+        <section class="fry-card hidden" id="actionCard">
+          <div class="card-head">
+            <span>第一根薯条</span>
+            <strong>低阻力</strong>
+          </div>
+          <label class="field-label" for="taskName">任务</label>
+          <input id="taskName" type="text" />
+          <div class="task-meta">
+            <label>
+              预计
+              <select id="durationSelect">
+                <option value="15">15分钟</option>
+                <option value="20">20分钟</option>
+                <option value="30">30分钟</option>
+              </select>
+            </label>
+            <label>
+              难度
+              <select id="difficultySelect">
+                <option>低</option>
+                <option>中</option>
+              </select>
+            </label>
+          </div>
+          <p id="reasonText">推荐原因：当前最容易启动。</p>
+          <button class="primary-button" type="button" id="acceptTaskBtn">接受并开始加热</button>
+        </section>
+      </section>
+
+      <section class="screen" id="heatScreen" data-screen="heat">
+        <header class="topbar compact">
+          <button class="icon-button" type="button" id="coolBtn" aria-label="退出">×</button>
+          <h1>加热中</h1>
+          <span class="heat-badge" id="temperatureText">80℃</span>
+        </header>
+
+        <section class="timer-stage">
+          <p id="heatingTaskName">整理第三章第一篇参考文献</p>
+          <div class="heat-plate">
+            <div class="steam"></div>
+            <div class="single-fry" id="heatedFry"></div>
+          </div>
+          <div class="timer-ring" style="--progress: 0deg">
+            <span id="timeLeft">15:00</span>
+          </div>
+          <p class="percent" id="percentText">完成 0%</p>
+          <div class="timer-actions">
+            <button class="soft-button" type="button" id="pauseBtn">暂停</button>
+            <button class="primary-button small" type="button" id="finishBtn">完成任务</button>
+          </div>
+        </section>
+      </section>
+
+      <section class="screen" id="verifyScreen" data-screen="verify">
+        <header class="topbar compact">
+          <button class="icon-button" type="button" data-nav="heat" aria-label="返回">‹</button>
+          <h1>成果验证</h1>
+          <span class="ghost-space"></span>
+        </header>
+
+        <section class="paper-panel">
+          <div class="panel-tab">上传成果</div>
+          <label class="upload-box" for="proofInput" id="uploadBox">
+            <span>＋</span>
+            <strong>上传任务截图</strong>
+            <small>用于模拟 AI 完成度检测</small>
+          </label>
+          <input id="proofInput" type="file" accept="image/*" hidden />
+          <div class="preview hidden" id="previewWrap">
+            <img id="proofPreview" alt="成果截图预览" />
+          </div>
+          <button class="primary-button" type="button" id="verifyBtn" disabled>AI 检测完成度</button>
+        </section>
+
+        <section class="result-card hidden" id="resultCard">
+          <span class="award">成熟啦</span>
+          <h2 id="scoreText">任务完成度：90%</h2>
+          <p id="fuelText">获得：3根薯条 · 知识燃料</p>
+          <button class="primary-button" type="button" id="saveResultBtn">收进薯条仓库</button>
+        </section>
+      </section>
+
+      <section class="screen" id="warehouseScreen" data-screen="warehouse">
+        <header class="topbar compact">
+          <button class="icon-button" type="button" data-nav="home" aria-label="返回">‹</button>
+          <h1>薯条仓库</h1>
+          <span class="ghost-space"></span>
+        </header>
+        <section class="history-list" id="historyList"></section>
+      </section>
+
+      <section class="screen" id="profileScreen" data-screen="profile">
+        <header class="topbar compact">
+          <button class="icon-button" type="button" data-nav="home" aria-label="返回">‹</button>
+          <h1>行动画像</h1>
+          <span class="ghost-space"></span>
+        </header>
+        <section class="paper-panel">
+          <div class="panel-tab">我的行动特点</div>
+          <ul class="insight-list" id="insightList">
+            <li>20分钟任务完成率最高</li>
+            <li>上午效率最高</li>
+            <li>长时间写作容易中断</li>
+          </ul>
+        </section>
+        <section class="paper-panel">
+          <div class="panel-tab">伙伴成长</div>
+          <div class="growth-row">
+            <div class="mini-buddy">🍟</div>
+            <div>
+              <strong id="profileLevel">Lv1 小薯条</strong>
+              <p id="profileNote">完成更多真实成果后，伙伴会长出不同个性。</p>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <nav class="bottom-nav">
+        <button type="button" data-nav="home" class="active">⌂<span>首页</span></button>
+        <button type="button" data-nav="create">＋<span>创建</span></button>
+        <button type="button" data-nav="warehouse">▤<span>仓库</span></button>
+        <button type="button" data-nav="profile">◎<span>画像</span></button>
+      </nav>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

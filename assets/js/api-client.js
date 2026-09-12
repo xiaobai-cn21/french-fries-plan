@@ -1,4 +1,4 @@
-window.FryPlanApi = (() => {
+﻿window.FryPlanApi = (() => {
   const DEEPSEEK_API_KEY = 'your-api-key';
   const DEEPSEEK_URL = 'https://api.deepseek.com/chat/completions';
   const DEEPSEEK_MODEL = 'deepseek-flash';

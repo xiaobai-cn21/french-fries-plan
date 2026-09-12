@@ -174,7 +174,7 @@ if(pageName==='success'){
 }
 if(pageName==='companion'){
   main.classList.add('companion');
-  main.innerHTML=`${headerMarkup()}<h1>我的薯条伙伴</h1><section class="companion-hero"><img class="companion-vector potato-left-art" src="../assets/images/potato-left.png" alt="" aria-hidden="true"><div class="speech">和我一起<br>把一个个小目标<br>变成大改变！</div><div class="level"><strong>Lv.1</strong><span>初次见面的小薯条伙伴</span></div></section><div class="growth-track" role="progressbar" aria-label="伙伴成长能量" aria-valuenow="0" aria-valuemin="0" aria-valuemax="50"><div><i></i></div><span>0 / 50 <b>ϟ</b></span></div>${stats(true)}${quote('不是更完美，而是更勇敢地开始。')}<section class="companion-words"><h2>伙伴寄语</h2><p>✨ 很高兴和你一起努力！<br>今天也要加油呀！<span>—— FryPlan</span></p><img class="mini-fries-vector potato-left-art" src="../assets/images/potato-left.png" alt="" aria-hidden="true"></section><a href="goal.html" class="quiet-link">一起开始今天的第一根薯条 →</a>`;
+  main.innerHTML=`${headerMarkup()}<h1>我的薯条伙伴</h1><section class="companion-hero"><img class="companion-vector" src="../assets/images/potato-left.png" alt="" aria-hidden="true"><div class="speech">和我一起<br>把一个个小目标<br>变成大改变！</div><div class="level"><strong>Lv.1</strong><span>初次见面的小薯条伙伴</span></div></section><div class="growth-track" role="progressbar" aria-label="伙伴成长能量" aria-valuenow="0" aria-valuemin="0" aria-valuemax="50"><div><i></i></div><span>0 / 50 <b>ϟ</b></span></div>${stats(true)}${quote('不是更完美，而是更勇敢地开始。')}<section class="companion-words"><h2>伙伴寄语</h2><p>✨ 很高兴和你一起努力！<br>今天也要加油呀！<span>—— FryPlan</span></p><img class="mini-fries-vector potato-left-art" src="../assets/images/potato-left.png" alt="" aria-hidden="true"></section><a href="goal.html" class="quiet-link">一起开始今天的第一根薯条 →</a>`;
 }
 
 if(pageName==='profile'){

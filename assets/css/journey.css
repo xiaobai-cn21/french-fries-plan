@@ -3,3 +3,218 @@
 /* Isolate the companion artwork without the reference phone frame or counters. */
 
 @media(max-width:360px){}
+
+.journey.companion{
+  width:min(100%,390px);
+  max-width:390px;
+  padding:calc(18px + env(safe-area-inset-top)) 18px max(20px,env(safe-area-inset-bottom));
+  background:
+    radial-gradient(ellipse at 12% 16%,#e8dccba8 0 14%,transparent 36%),
+    radial-gradient(ellipse at 96% 4%,#d6c6a873 0 11%,transparent 30%),
+    linear-gradient(180deg,#fff9ec 0%,#fff8f1 56%,#fff3df 100%);
+}
+.companion .top{
+  height:36px;
+}
+.companion .back{
+  margin-left:-4px;
+  color:#2c2924;
+}
+.companion h1{
+  margin:0 0 8px;
+  font-size:21px;
+  line-height:1.25;
+  letter-spacing:0;
+}
+.companion-hero{
+  height:178px;
+  margin:0;
+  border-radius:0;
+  background:transparent;
+}
+.journey.companion .companion-vector{
+  position:absolute;
+  top:-6px;
+  right:0;
+  width:154px;
+  height:158px;
+  object-fit:cover;
+  object-position:43% 58%;
+  border-radius:22px;
+  filter:drop-shadow(0 12px 20px #d69c4b24);
+}
+.speech{
+  left:0;
+  top:28px;
+  width:106px;
+  max-width:106px;
+  min-height:78px;
+  padding:16px 13px;
+  border-radius:46% 50% 47% 45%;
+  background:#fffefa;
+  color:#2d2923;
+  font-size:11px;
+  line-height:1.55;
+  box-shadow:0 12px 30px #d7bd8f24;
+  transform:rotate(-7deg);
+}
+.speech:after{
+  right:-5px;
+  bottom:8px;
+  border-left-width:18px;
+  border-top-width:12px;
+}
+.level{
+  left:0;
+  bottom:2px;
+}
+.level strong{
+  font-size:20px;
+  line-height:1;
+}
+.level span{
+  display:block;
+  max-width:168px;
+  margin-top:4px;
+  overflow:hidden;
+  color:#9d8c76;
+  font-size:10px;
+  line-height:1.3;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.growth-track{
+  gap:10px;
+  min-height:32px;
+  margin:0 0 10px;
+  padding:8px 12px;
+  border:1px solid #fff;
+  border-radius:18px;
+  background:#fffdf9;
+  box-shadow:0 10px 22px #d8b57a1f;
+}
+.growth-track>div{
+  height:9px;
+  background:#f4e4cf;
+}
+.growth-track i{
+  min-width:18px;
+  background:linear-gradient(90deg,#ffc149,#ff8a2a);
+}
+.growth-track>span{
+  min-width:70px;
+  color:#806f59;
+  font-size:12px;
+  font-weight:700;
+  text-align:right;
+}
+.stats{
+  margin:0 0 12px;
+  padding:14px 0;
+  border:1px solid #fff;
+  border-radius:18px;
+  background:#fffdf9;
+  box-shadow:0 10px 22px #d8b57a1b;
+}
+.stats strong{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:5px;
+  font-size:23px;
+  color:#1f1d19;
+}
+.stats strong span{
+  margin:0;
+  font-size:15px;
+}
+.stats small{
+  margin-top:7px;
+  color:#91877a;
+  font-size:10px;
+}
+.companion .quote{
+  justify-content:center;
+  margin:0 0 12px;
+  padding:0 4px;
+  color:#887a69;
+  font-size:11px;
+  line-height:1.7;
+  text-align:center;
+}
+.companion .quote>span,
+.companion .quote p:after{
+  color:#ffaf61;
+}
+.companion .quote>span{
+  font-size:22px;
+}
+.companion-words{
+  min-height:134px;
+  padding:14px;
+  border:1px solid #fff1d8;
+  border-radius:18px;
+  background:#fffdf9;
+  box-shadow:0 10px 22px #d8b57a1b;
+}
+.companion-words h2{
+  margin-bottom:12px;
+  font-size:13px;
+}
+.companion-words p{
+  width:72%;
+  min-height:78px;
+  padding:14px 16px;
+  border-radius:16px;
+  background:#fff0d5;
+  color:#907f6a;
+  font-size:12px;
+  line-height:1.75;
+}
+.companion-words p span{
+  margin-top:5px;
+}
+.journey.companion .companion-words .mini-fries-vector{
+  right:10px;
+  bottom:15px;
+  width:68px;
+  height:76px;
+  object-fit:cover;
+  object-position:50% 57%;
+  border-radius:10px;
+}
+.companion .quiet-link{
+  margin-top:16px;
+  color:#9a7d5e;
+  font-size:12px;
+}
+@media(min-width:760px){
+  .journey.companion{
+    max-width:390px;
+    min-height:780px;
+    padding-top:24px;
+  }
+}
+@media(max-width:360px){
+  .journey.companion{
+    padding-left:16px;
+    padding-right:16px;
+  }
+  .companion h1{
+    font-size:20px;
+  }
+  .companion-vector{
+    right:4px;
+    width:145px;
+  }
+  .speech{
+    width:100px;
+    max-width:100px;
+    font-size:10px;
+  }
+  .companion-words p{
+    width:70%;
+    padding-left:12px;
+    padding-right:12px;
+  }
+}

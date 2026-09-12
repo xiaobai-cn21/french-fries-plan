@@ -12,12 +12,12 @@ python -m http.server 8000
 
 Visit `http://localhost:8000`. Keep using the same browser and origin to access saved progress.
 
-AI time estimates, starter fries, and photo verification use the optional local API:
+AI time estimates, starter fries, and photo verification use the optional local Python API:
 
 ```powershell
 Copy-Item api/.env.example api/.env
 # Fill in api/.env
-node --env-file=api/.env api/server.mjs
+python scripts/start_api.py
 ```
 
 The frontend calls `http://127.0.0.1:3001` by default. If the API is not running, time estimates and starter fries fall back to local defaults; photo verification requires the API before a task can be marked complete.

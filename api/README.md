@@ -4,13 +4,12 @@
 
 ## Python 启动
 
-Python 版本使用标准库，不需要安装依赖。从 `api/` 目录运行：
+Python 版本使用标准库，不需要安装依赖。从项目根目录运行：
 
 ```powershell
-$env:DEEPSEEK_API_KEY="your-api-key"
-$env:DEEPSEEK_MODEL="deepseek-flash"
-$env:DEEPSEEK_VISION_MODEL="deepseek-flash"
-python server.py
+Copy-Item api/.env.example api/.env
+# 编辑 api/.env，填入 DEEPSEEK_API_KEY
+python scripts/start_api.py
 ```
 
 服务器平台上设置同样的环境变量，并使用启动命令：

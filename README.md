@@ -24,7 +24,13 @@ The frontend calls `http://127.0.0.1:3001` by default. If the API is not running
 
 ## GitHub Pages and API deployment
 
-GitHub Pages can host the frontend files in this repository, but it cannot run the Node.js API in `api/server.mjs`. Deploy the API folder to a Node host such as Render, Railway, Fly.io, or another server, set `DEEPSEEK_API_KEY`, `DEEPSEEK_MODEL`, and `DEEPSEEK_VISION_MODEL` there, then point the GitHub Pages frontend to that public API URL:
+GitHub Pages can host the frontend files in this repository, but it cannot run the Node.js API in `api/server.mjs`.
+
+This repo includes a GitHub Actions Pages workflow at `.github/workflows/pages.yml`. On every push to `main`, it runs `python scripts/build_pages.py`, copies the static frontend into `_site/`, and deploys that folder to GitHub Pages.
+
+In the GitHub repository, go to **Settings -> Pages -> Build and deployment**, then set **Source** to **GitHub Actions**. Push to `main`, or run the workflow manually from the **Actions** tab.
+
+Deploy the API folder to a Node host such as Render, Railway, Fly.io, or another server, set `DEEPSEEK_API_KEY`, `DEEPSEEK_MODEL`, and `DEEPSEEK_VISION_MODEL` there, then point the GitHub Pages frontend to that public API URL:
 
 ```js
 localStorage.setItem('fryplan-api-base', 'https://your-api-domain.example')

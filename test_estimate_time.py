@@ -1,18 +1,13 @@
 # 薯条计划 /api/estimate-time 提示词实测
 # 数据流：goal 文本 + 固定系统提示词 → deepseek-flash → JSON{"time": "..."}
 # 用法：python tools/test_estimate_time.py
-import json
-import os
 import sys
-import time
-import urllib.error
-import urllib.request
+
+from api.deepseek_client import call_deepseek, parse_json_content, text_model
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-API_KEY = os.environ.get("DEEPSEEK_API_KEY", "")  # DeepSeek 平台；上线请放后端环境变量
-URL = "https://api.deepseek.com/chat/completions"
-MODEL = "deepseek-flash"
+MODEL = text_model()
 
 # ---- 后端写死的系统提示词 ----
 SYSTEM_PROMPT = """你是薯条计划的任务助手。请全程使用中文，包括你的内部思考过程。
@@ -38,39 +33,19 @@ SYSTEM_PROMPT = """你是薯条计划的任务助手。请全程使用中文，�
 
 
 def call_model(goal):
-    body = {
-        "model": MODEL,
-        "temperature": 0.1,
-        "messages": [
+    result = call_deepseek(
+        [
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": f"【大目标】{goal}\n请估算完成这个大目标大概需要多久。"},
         ],
-    }
-    req = urllib.request.Request(
-        URL, data=json.dumps(body).encode("utf-8"),
-        headers={"Content-Type": "application/json", "Authorization": "Bearer " + API_KEY},
+        model=MODEL,
+        json_mode=True,
     )
-    t0 = time.time()
-    try:
-        with urllib.request.urlopen(req, timeout=90) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
-    except urllib.error.HTTPError as e:
-        raise RuntimeError(f"HTTP {e.code}: {e.read().decode('utf-8', 'replace')[:300]}")
-    cost = time.time() - t0
-    msg = data["choices"][0]["message"]
-    return msg["content"], cost, data.get("usage", {})
+    return result["content"], result["seconds"], result["usage"]
 
 
 def parse_json(text):
-    t = text.strip()
-    if t.startswith("```"):
-        t = t.strip("`")
-        if t.lower().startswith("json"):
-            t = t[4:]
-    start, end = t.find("{"), t.rfind("}")
-    if start != -1 and end != -1:
-        t = t[start:end + 1]
-    return json.loads(t)
+    return parse_json_content(text)
 
 
 if __name__ == "__main__":

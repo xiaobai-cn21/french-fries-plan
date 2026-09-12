@@ -2,18 +2,13 @@
 # 数据流：goal + 图片 + 固定系统提示词 → 多模态模型 → JSON(related/score/summary/evaluation/message)
 # 用法：python tools/test_verify_photo.py
 import base64
-import json
-import os
 import sys
-import time
-import urllib.error
-import urllib.request
+
+from api.deepseek_client import call_deepseek, parse_json_content, vision_model
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-API_KEY = os.environ.get("DEEPSEEK_API_KEY", "")  # DeepSeek 平台；上线请放后端环境变量
-URL = "https://api.deepseek.com/chat/completions"
-MODEL_CANDIDATES = ["deepseek-flash", "deepseek-v4-pro"]
+MODEL_CANDIDATES = [vision_model(), "deepseek-flash", "deepseek-v4-pro"]
 THRESHOLD = 60  # 业务阈值：score >= 60 视为通过（示例值，可调）
 
 # ---- 后端写死的系统提示词（用户原版 + JSON 输出格式 + 评分规则）----
@@ -42,44 +37,22 @@ SYSTEM_PROMPT = """你是薯条计划的任务助手。请全程使用中文，�
 def call_model(model, goal, image_path):
     with open(image_path, "rb") as f:
         b64 = base64.b64encode(f.read()).decode()
-    body = {
-        "model": model,
-        "temperature": 0.1,
-        "messages": [
+    result = call_deepseek(
+        [
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": [
                 {"type": "image_url", "image_url": {"url": "data:image/png;base64," + b64}},
                 {"type": "text", "text": f"【最小可执行任务】{goal}\n请校验所上传图片是否完成了该任务。"},
             ]},
         ],
-    }
-    req = urllib.request.Request(
-        URL, data=json.dumps(body).encode("utf-8"),
-        headers={"Content-Type": "application/json", "Authorization": "Bearer " + API_KEY},
+        model=model,
+        json_mode=True,
     )
-    t0 = time.time()
-    try:
-        with urllib.request.urlopen(req, timeout=90) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
-    except urllib.error.HTTPError as e:
-        detail = e.read().decode("utf-8", "replace")
-        raise RuntimeError(f"HTTP {e.code}: {detail[:300]}")
-    cost = time.time() - t0
-    content = data["choices"][0]["message"]["content"]
-    usage = data.get("usage", {})
-    return content, cost, usage
+    return result["content"], result["seconds"], result["usage"]
 
 
 def parse_json(text):
-    t = text.strip()
-    if t.startswith("```"):  # 容错：剥掉代码块标记
-        t = t.strip("`")
-        if t.lower().startswith("json"):
-            t = t[4:]
-    start, end = t.find("{"), t.rfind("}")
-    if start != -1 and end != -1:
-        t = t[start:end + 1]
-    return json.loads(t)
+    return parse_json_content(text)
 
 
 def pick_model(goal, image_path):

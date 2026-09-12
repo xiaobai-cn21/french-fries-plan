@@ -1,0 +1,10 @@
+/* Layout only; the vector component owns its shading and animation. */
+.oven-scene{aspect-ratio:440/290;background:none;overflow:hidden}
+.oven-scene fry-art{width:100%;height:100%}
+.paused .oven-scene,.ended .oven-scene{filter:none}
+.home-fries{position:absolute;right:-17px;top:3px;width:180px;height:242px;transform:rotate(7deg);pointer-events:none}
+.companion-vector{position:absolute;right:0;top:-9px;width:195px;height:255px}
+.mini-fries-vector{position:absolute;right:0;top:-8px;width:72px;height:85px;transform:rotate(8deg)}
+.potato-left-art{object-fit:cover;object-position:50% 58%;border-radius:12px}
+.companion-words .mini-fries-vector{top:auto;bottom:7px;right:1px;width:76px;height:92px}
+@media(max-width:370px){.home-fries{width:157px;right:-24px}.companion-vector{width:173px;right:-4px}}

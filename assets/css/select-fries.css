@@ -1,0 +1,34 @@
+:root{font-family:'PingFang SC','Microsoft YaHei',system-ui,sans-serif;color:#141414;background:#eee8df;font-synthesis:none}
+*{box-sizing:border-box}
+body{margin:0;min-width:320px}
+button{font:inherit;cursor:pointer}
+button,a{-webkit-tap-highlight-color:transparent}
+a{color:inherit;text-decoration:none}
+svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.select-fries-page{width:100%;max-width:430px;min-height:100svh;margin:0 auto;padding:calc(18px + env(safe-area-inset-top)) 16px max(22px,env(safe-area-inset-bottom));background:radial-gradient(ellipse at 18% 94%,#ffe5bc82,transparent 34%),radial-gradient(ellipse at 88% 4%,#fff2cf91,transparent 44%),#fff8ec}
+.page-top{height:64px;display:flex;align-items:flex-start;justify-content:space-between}
+.back-button{display:grid;place-items:center;width:32px;height:32px;margin-left:-3px;border-radius:50%;color:#1d1d1d}
+.page-top p{text-align:center;margin:2px 24px 0 0;color:#c28e65;font:600 11px/1.25 Georgia,serif;font-style:italic}
+.intro h1{font-size:26px;line-height:1.25;margin:0 0 6px;font-weight:900;letter-spacing:0}
+.intro h1:after{content:'';display:block;width:92px;height:3px;margin-top:8px;border-radius:4px;background:#ff8a20}
+.intro p{font-size:14px;line-height:1.55;margin:0 0 15px;color:#82796f;font-weight:650}
+.fries-list{display:grid;gap:11px;margin:0 0 26px}
+.fry-option{position:relative;display:grid;grid-template-columns:64px minmax(0,1fr) 24px;gap:12px;align-items:center;min-height:102px;padding:13px 13px;border:1px solid #eee1d2;border-radius:14px;background:#fffdf8;box-shadow:0 7px 18px #9d6a2c0c}
+.fry-option input{position:absolute;opacity:0;pointer-events:none}
+.fry-option.recommended{border-color:#ff861f;box-shadow:0 9px 22px #ff8a1f18}
+.fry-option.recommended:after{content:'推荐';position:absolute;right:-1px;top:-1px;padding:7px 12px 8px;border-radius:0 14px 0 14px;background:#ff7430;color:white;font-size:13px;font-weight:800}
+.fry-art{display:block;width:60px;height:60px;border-radius:18px;overflow:hidden}
+.fry-art img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.fry-copy strong{display:block;font-size:17px;line-height:1.35;margin:0 0 2px;font-weight:900;color:#211b17}
+.fry-copy small{display:block;font-size:13px;line-height:1.45;color:#766d64}
+.meta{display:flex;flex-wrap:nowrap;gap:8px;margin-top:9px;white-space:nowrap}
+.meta b{display:flex;align-items:center;gap:5px;min-height:27px;padding:0 10px;border-radius:15px;background:#fff3e1;color:#2e261d;font-size:12px;font-weight:850;white-space:nowrap;flex:0 0 auto}
+.meta svg{width:15px;height:15px;color:#ff6824}
+.radio-dot{width:22px;height:22px;border:2px solid #dbcfc1;border-radius:50%;justify-self:end}
+.fry-option:has(input:checked) .radio-dot{border-color:#ff6824;box-shadow:inset 0 0 0 4px #fff;background:#ff6824}
+.primary-action{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;min-height:54px;border:1px solid #ff9d4c;border-radius:28px;background:linear-gradient(157deg,#ffb944 0%,#ff842a 31%,#ff5d1c 68%,#ff4c20 100%);box-shadow:inset 0 2px 2px #ffe7ac8f,0 7px 16px #ff7b2724;color:#fff;font-size:17px;font-weight:850}
+.primary-action:disabled{opacity:.52}
+.quote{text-align:center;margin:15px 0 0;color:#8d8378;font-size:13px;line-height:1.7}
+.status{text-align:center;margin:10px 0 0;color:#9e6737;font-size:12px;line-height:1.6}
+.status:empty{display:none}
+@media(min-width:760px){body{padding:18px 0;background:radial-gradient(ellipse at 72% 74%,#ffddb466,transparent 52%),#eee8df}.select-fries-page{max-width:300px;min-height:650px;padding:18px 13px 22px;border-radius:24px;box-shadow:0 18px 52px #80624724;border:1px solid #fff}.page-top{height:51px}.intro h1{font-size:22px}.intro p{font-size:12px}.fries-list{gap:9px;margin-bottom:20px}.fry-option{grid-template-columns:50px minmax(0,1fr) 18px;gap:8px;min-height:84px;padding:10px}.fry-art{width:48px;height:48px;border-radius:14px}.fry-copy strong{font-size:14px}.fry-copy small{font-size:11px}.meta{gap:4px}.meta b{font-size:9px;min-height:23px;padding:0 6px;gap:3px}.meta svg{width:12px;height:12px}.radio-dot{width:18px;height:18px}.primary-action{min-height:45px;font-size:15px}}

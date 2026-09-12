@@ -1,0 +1,94 @@
+:root{font-family:'PingFang SC','Microsoft YaHei',system-ui,sans-serif;color:#171717;background:#eee8df;font-synthesis:none}
+*{box-sizing:border-box}
+body{margin:0;min-width:320px}
+button{font:inherit;cursor:pointer}
+button:disabled{cursor:wait;opacity:.72}
+button,a{-webkit-tap-highlight-color:transparent}
+a{color:inherit;text-decoration:none}
+svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.first-fry-page{width:100%;max-width:430px;min-height:100svh;margin:0 auto;padding:calc(20px + env(safe-area-inset-top)) 20px max(22px,env(safe-area-inset-bottom));background:radial-gradient(ellipse at 78px 104px,#fffaf3 0,#fffaf300 56%),radial-gradient(ellipse at 83% 7%,#ffe2a785 0,#ffe2a700 42%),radial-gradient(ellipse at 14% 86%,#ffe2b36b 0,#ffe2b300 47%),#fff8ec}
+.page-top{height:34px;display:flex;align-items:flex-start}
+.back-button{display:grid;place-items:center;width:30px;height:30px;margin-left:-5px;color:#242424;border-radius:50%}
+.back-button:hover{background:#fff0d8}
+.back-button svg{width:22px;height:22px;stroke-width:2.2}
+.hero{display:grid;grid-template-columns:minmax(0,1fr) 108px;align-items:center;column-gap:8px;margin:0 0 15px}
+.hero h1{font-size:27px;line-height:1.16;font-weight:900;margin:0 0 8px;letter-spacing:0;color:#050505}
+.hero p{font-size:14px;line-height:1.42;color:#8d8175;margin:0;font-weight:750}
+.hero-art{width:92px;height:92px;justify-self:end;filter:drop-shadow(0 8px 14px #d9792f1f)}
+.fry-card{background:#fffefa;border:1px solid #f0dfc9;border-radius:15px;padding:15px 15px 14px;box-shadow:0 9px 24px #a46b2812}
+.goal-row{display:grid;grid-template-columns:46px minmax(0,1fr);gap:12px;align-items:center}
+.goal-icon{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:#fff1d9;color:#ff6330}
+.goal-icon svg{width:28px;height:28px;stroke-width:2.5}
+.goal-row h2{font-size:17px;line-height:1.38;margin:0;color:#261f19;font-weight:900;overflow-wrap:anywhere}
+.meta-row{display:flex;flex-wrap:wrap;gap:9px;margin:17px 0 12px}
+.time-pill,.effort-pill{display:flex;align-items:center;gap:7px;min-height:33px;border:0;border-radius:18px;background:#fff3e1;color:#2e261d;padding:0 12px;font-size:13px;font-weight:850}
+.time-pill svg,.effort-pill svg{width:17px;height:17px;color:#ff6824;stroke-width:2.3}
+.time-pill strong{font-size:14px;color:#171717}
+.task-copy{font-size:13px;line-height:1.62;color:#8a7a69;margin:0}
+.time-choices{margin:12px 0 0}
+.time-choices h2{font-size:15px;line-height:1.4;margin:0 0 9px;font-weight:900;color:#201b17}
+.choice-row{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.choice-row button{position:relative;min-height:44px;border:1px solid #e9dfd4;border-radius:20px;background:#fffefd;color:#231d18;font-size:14px;font-weight:850}
+.choice-row button.selected{border:2px solid #ff5f24;color:#ff5f24;background:#fff9ed}
+.choice-row button span{position:absolute;left:50%;top:-13px;transform:translateX(-50%);white-space:nowrap;border-radius:13px;background:#ff6b2d;color:white;padding:3px 9px;font-size:10px;line-height:1}
+.time-choices p{margin:9px 0 0;text-align:center;color:#9b9087;font-size:12px;line-height:1.5}
+.tip-card{display:grid;grid-template-columns:30px minmax(0,1fr);gap:8px;align-items:center;margin:13px 0 0;padding:11px 12px;border:1px solid #f0dfc9;border-radius:12px;background:#fffaf1;color:#8a7a69}
+.tip-card[hidden],.time-choices[hidden]{display:none}
+.tip-card span{font-size:22px}
+.tip-card p{margin:0;font-size:12px;line-height:1.55}
+.primary-action{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;min-height:50px;margin:20px 0 17px;border:1px solid #ff9d4c;border-radius:26px;background:linear-gradient(157deg,#ffb944 0%,#ff842a 31%,#ff5d1c 68%,#ff4c20 100%);box-shadow:inset 0 2px 2px #ffe7ac8f,0 7px 16px #ff7b2724;color:#fff;font-size:16px;font-weight:850}
+.primary-action svg{width:20px;height:20px;stroke-width:2.1}
+.quote{text-align:center;margin:0;color:#948a80;font-size:13px;line-height:1.7;letter-spacing:0}
+.status{text-align:center;margin:12px 0 0;min-height:18px;color:#9e6737;font-size:12px;line-height:1.6}
+.status:empty{display:none}
+@media(min-width:760px){
+  body{padding:18px 0;background:radial-gradient(ellipse at 72% 74%,#ffddb466,transparent 52%),#eee8df}
+  .first-fry-page{max-width:300px;min-height:650px;padding:19px 16px 22px;border-radius:24px;box-shadow:0 18px 52px #80624724;border:1px solid #fff}
+  .page-top{height:31px}
+  .back-button{width:25px;height:25px;margin-left:-3px}
+  .back-button svg{width:19px;height:19px}
+  .hero{grid-template-columns:minmax(0,1fr) 76px;column-gap:6px;margin-bottom:13px}
+  .hero h1{font-size:24px;line-height:1.18;margin-bottom:6px}
+  .hero p{font-size:12px;line-height:1.45;font-weight:750}
+  .hero-art{width:72px;height:72px}
+  .fry-card{border-radius:13px;padding:14px 13px 13px}
+  .goal-row{grid-template-columns:40px minmax(0,1fr);gap:10px}
+  .goal-icon{width:40px;height:40px}
+  .goal-icon svg{width:24px;height:24px}
+  .goal-row h2{font-size:15px;line-height:1.38}
+  .meta-row{gap:8px;margin:14px 0 11px}
+  .time-pill,.effort-pill{min-height:30px;border-radius:16px;padding:0 10px;font-size:12px;gap:6px}
+  .time-pill svg,.effort-pill svg{width:15px;height:15px}
+  .time-pill strong{font-size:12px}
+  .task-copy{font-size:12px;line-height:1.65}
+  .time-choices{margin-top:10px}
+  .time-choices h2{font-size:13px;margin-bottom:8px}
+  .choice-row{gap:7px}
+  .choice-row button{min-height:38px;border-radius:17px;font-size:12px}
+  .time-choices p{font-size:10px}
+  .tip-card{grid-template-columns:24px minmax(0,1fr);padding:9px 10px}
+  .tip-card span{font-size:19px}
+  .tip-card p{font-size:10px}
+  .primary-action{min-height:45px;margin:19px 0 15px;border-radius:23px;font-size:15px;gap:8px}
+  .primary-action svg{width:17px;height:17px}
+  .quote{font-size:12px}
+}
+@media(max-width:360px){
+  .first-fry-page{padding-left:18px;padding-right:18px}
+  .hero{grid-template-columns:minmax(0,1fr) 88px}
+  .hero h1{font-size:25px}
+  .hero p{font-size:13px}
+  .hero-art{width:86px;height:86px}
+  .fry-card{padding:15px 14px}
+  .goal-row{grid-template-columns:43px minmax(0,1fr);gap:11px}
+  .goal-icon{width:43px;height:43px}
+  .goal-icon svg{width:26px;height:26px}
+  .goal-row h2{font-size:16px}
+  .time-pill,.effort-pill{font-size:12px;min-height:32px;padding:0 10px}
+  .time-pill strong{font-size:12px}
+  .task-copy{font-size:12px}
+  .choice-row button{font-size:12px}
+  .tip-card p{font-size:11px}
+  .primary-action{min-height:49px;font-size:15px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}

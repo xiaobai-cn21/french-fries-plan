@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fcf8f0">
+  <title>输入你的目标 · 薯条计划 FryPlan</title>
+  <link rel="stylesheet" href="../assets/css/goal.css">
+  <link rel="stylesheet" href="../assets/css/ai-loading.css">
+  <style>.suggestions button:last-child{margin-right:60%}</style>
+  <script src="../assets/js/api-client.js" defer></script><script src="../assets/js/progress.js" defer></script><script src="../assets/js/tasks.js" defer></script><script src="../assets/js/goal.js" defer></script>
+<link rel="stylesheet" href="../assets/css/artwork.css"><script src="../assets/js/fry-art.js" defer></script></head>
+<body>
+  <main class="goal-page">
+    <header class="page-header">
+      <a class="back-button" href="../index.html" aria-label="返回首页"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m6-7-7 7 7 7"/></svg></a>
+      <img class="mini-fries-vector potato-left-art" src="../assets/images/potato-left.png" alt="" aria-hidden="true">
+    </header>
+    <section class="goal-content" aria-labelledby="page-title">
+      <h1 id="page-title">输入你的目标</h1>
+      <p class="intro" id="goal-help">写下你现在想做的一件小事<br>让它成为今天的第一根薯条 <span aria-hidden="true">🍟</span></p>
+      <form id="create-goal" novalidate>
+        <div class="input-wrap">
+          <label class="visually-hidden" for="goal">你的目标，最多 50 个字符</label>
+          <textarea id="goal" name="goal" maxlength="50" placeholder="写论文第三章" aria-describedby="goal-help goal-count feedback"></textarea>
+          <span class="character-count" id="goal-count"><span id="count">0</span>/50</span>
+        </div>
+        <div class="suggestion-heading"><span>试试这些目标：</span><button type="button" id="refresh"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5M6 7a7 7 0 0 1 12-1l2 3M4 15l2 3a7 7 0 0 0 12-1"/></svg>换一换</button></div>
+        <div class="suggestions" id="suggestions" role="group" aria-label="推荐目标"></div>
+        <button type="submit" class="generate-button">生成新的薯条 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></button>
+        <p class="feedback" id="feedback" role="status" aria-live="polite"></p>
+      </form>
+      <p class="page-footer">从一个清晰的目标，开始改变。</p>
+    </section>
+  </main>
+</body>
+</html>

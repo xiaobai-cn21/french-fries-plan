@@ -1,0 +1,24 @@
+/* Match the home screen on the supplied reference board. The artwork is
+   displayed through a CSS crop; the original reference stays untouched. */
+.fries-scene{display:none}
+
+
+.app-shell{background:radial-gradient(ellipse at 100% 32%,#ffedc9aa,transparent 55%),linear-gradient(115deg,#fffdf8,#fff6e6)}
+.topbar{padding-top:31px}
+.brand strong{font-size:26px;letter-spacing:-1px}
+.brand>span{font-size:17px;font-weight:500;margin-top:3px}
+.brand i{display:none}
+.hero{height:245px;margin-top:0}
+.hero-copy{padding-top:0}
+.little-label{display:none}
+h1{font-size:27px;line-height:1.5;letter-spacing:-.9px;margin-bottom:15px}
+.hero-copy p{font-size:12px;line-height:1.7}
+.underline:after{display:none}
+.primary-button{min-height:53px;font-weight:600}
+.energy{margin:10px 0 14px}
+.streak-card{border-radius:13px;padding:14px 14px 13px;box-shadow:none}
+blockquote{margin:13px 0;padding:14px 17px;border-radius:13px}
+.categories button{min-height:73px;border-radius:11px}
+.bottom-message{margin:22px 0;color:#baa78a}
+@media(min-width:760px){.app-shell{min-height:790px;max-width:400px}.hero{height:248px}.hero-copy h1{font-size:25px}.topbar{padding-top:29px}.desktop-note h2{font-size:29px}}
+@media(max-width:370px){.hero{height:231px}.hero-copy h1{font-size:23px}.hero-copy p{font-size:11px}}

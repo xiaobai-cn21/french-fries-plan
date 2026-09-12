@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fff8eb">
+  <title>薯条计划 FryPlan · 从第一根薯条开始</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/reference.css">
+  <link rel="stylesheet" href="assets/css/task-home.css">
+  <script src="assets/js/progress.js" defer></script><script src="assets/js/tasks.js" defer></script><script src="assets/images/fries/fries-data.js" defer></script><script src="assets/js/task-carton.js" defer></script><script src="assets/js/app.js" defer></script>
+<link rel="stylesheet" href="assets/css/artwork.css"><script src="assets/js/fry-art.js" defer></script></head>
+<body>
+  <svg class="svg-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <symbol id="home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1Z"/></symbol>
+    <symbol id="goal" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="4"/><path d="m9 9 6-2-2 6-6 2Z"/></symbol>
+    <symbol id="check" viewBox="0 0 24 24"><path d="m12 2 3 3 4 1 1 4 2 2-2 3-1 4-4 1-3 2-3-2-4-1-1-4-2-3 2-2 1-4 4-1Z"/><path d="m8 12 3 3 5-6"/></symbol>
+    <symbol id="friend" viewBox="0 0 24 24"><path d="M8 5C5 0 0 5 4 9l3 2-3 8 5 2 3-5 3 5 5-2-3-8 3-2c4-4-1-9-4-4l-4 4Z"/></symbol>
+    <symbol id="user" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M4 21v-3a8 8 0 0 1 16 0v3Z"/></symbol>
+    <symbol id="bell" viewBox="0 0 24 24"><path d="M5 16h14l-2-3V9a5 5 0 0 0-10 0v4Zm5 4h4M12 2v2"/></symbol>
+    <symbol id="arrow" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6"/></symbol>
+    <symbol id="book" viewBox="0 0 24 24"><path d="M12 6v15M3 4l9 2 9-2v15l-9 2-9-2Z"/></symbol>
+    <symbol id="work" viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="15" rx="3"/><path d="M9 6V3h6v3M4 12h16m-10 0v3h4v-3"/></symbol>
+    <symbol id="heart" viewBox="0 0 24 24"><path d="M12 21 3 12C-2 4 8-1 12 6c4-7 14-2 9 6Z"/><path d="m7 12 3 3 6-6"/></symbol>
+    <symbol id="spark" viewBox="0 0 24 24"><path d="m12 2 3 7 7 3-7 3-3 7-3-7-7-3 7-3Z"/></symbol>
+  </defs></svg>
+
+  <aside class="desktop-note" aria-hidden="true"><span class="eyebrow">A LITTLE START. A BIG CHANGE.</span><h2>把想做的事，<br>变成日常<span>。</span></h2><div class="note-line"></div><p>更小的开始<br>更大的改变</p><span class="handwritten">Good things<br>start small.</span></aside>
+
+  <div class="app-shell">
+    <header class="topbar"><a class="brand" href="./" aria-label="薯条计划首页"><strong>薯条计划</strong><span>FryPlan<i></i></span></a><button class="icon-button" id="reminder" aria-label="查看提醒"><svg><use href="#bell"/></svg><span class="notification-dot"></span></button></header>
+    <main class="task-home">
+      <section class="task-carton-section" aria-labelledby="carton-title">
+        <h1 id="carton-title">选择你的行动薯条</h1>
+        <p class="task-count" id="task-count">我的薯条盒</p>
+        <task-carton id="task-carton"></task-carton>
+        <p class="task-guidance" id="task-guidance">正在打开你的薯条盒…</p>
+        <p class="home-error" id="task-error" role="status"></p>
+      </section>
+      <div class="energy"><span>✦</span> 今日剩余薯条能量 <strong>20</strong></div>
+
+      <section class="streak-card" aria-labelledby="streak-title"><div class="streak-heading"><h2 id="streak-title"><span>🔥</span> 连续打卡</h2><span class="muted">一点点，也在向前</span></div><div class="streak-body"><div class="streak-count"><strong>0</strong><span>天</span></div><div class="week" aria-label="本周尚未完成任务"><div><i></i><span>一</span></div><div><i></i><span>二</span></div><div><i></i><span>三</span></div><div><i></i><span>四</span></div><div><i></i><span>五</span></div><div><i></i><span>六</span></div><div><i></i><span>日</span></div></div></div></section>
+
+      <blockquote><span class="quote-mark">“</span><p>每一个小小的开始，<br>都在让你靠近更好的自己。<span>”</span></p><span class="quote-star">✧</span></blockquote>
+      <section class="categories" aria-label="选择目标类型"><button data-create data-category="专注学习" class="study"><span class="category-icon"><svg><use href="#book"/></svg></span>专注学习</button><button data-create data-category="工作任务" class="work"><span class="category-icon"><svg><use href="#work"/></svg></span>工作任务</button><button data-create data-category="健康生活" class="health"><span class="category-icon"><svg><use href="#heart"/></svg></span>健康生活</button><button data-create data-category="自我提升" class="growth"><span class="category-icon"><svg><use href="#spark"/></svg></span>自我提升</button></section>
+      <p class="bottom-message">慢慢来，每一根薯条都算数 <span>☺</span></p>
+    </main>
+    <nav class="bottom-nav" aria-label="主导航"><button class="active" aria-current="page"><svg><use href="#home"/></svg><span>首页</span></button><button data-create><svg><use href="#goal"/></svg><span>目标</span></button><button data-panel="专注"><svg><use href="#check"/></svg><span>专注</span></button><button data-panel="伙伴"><svg><use href="#friend"/></svg><span>伙伴</span></button><button data-panel="我的"><svg><use href="#user"/></svg><span>我的</span></button></nav>
+  </div>
+  <aside class="desktop-sign" aria-hidden="true">Small steps,<br><span>golden days.</span><div>薯条计划 / FryPlan</div></aside>
+
+  <dialog id="info-dialog"><div class="sheet-top"><span>FryPlan</span><button class="close-button" aria-label="关闭">×</button></div><span class="sheet-emoji" id="info-emoji">🍟</span><h2 id="info-title"></h2><p id="info-copy"></p><button class="primary-button close-button-text">回到首页</button></dialog>
+  <div id="toast" class="toast" role="status"></div>
+</body>
+</html>

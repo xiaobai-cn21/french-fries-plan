@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fff8ed">
+  <title>选一根适合现在的薯条 · FryPlan</title>
+  <link rel="stylesheet" href="../assets/css/select-fries.css">
+  <link rel="stylesheet" href="../assets/css/ai-loading.css">
+  <script src="../assets/js/api-client.js" defer></script>
+  <script src="../assets/js/tasks.js" defer></script>
+  <script src="../assets/js/progress.js" defer></script>
+  <script src="../assets/js/select-fries.js" defer></script>
+</head>
+<body>
+  <main class="select-fries-page">
+    <header class="page-top">
+      <a class="back-button" href="../index.html" aria-label="返回首页"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m6-7-7 7 7 7"/></svg></a>
+      <p>More Fries<br>A Brighter You</p>
+    </header>
+    <section class="intro" aria-labelledby="select-title">
+      <h1 id="select-title">选一根适合现在的薯条</h1>
+      <p>AI 先帮你切好了几种更容易开始的小行动</p>
+    </section>
+    <form id="fries-form">
+      <div class="fries-list" id="fries-list" aria-label="可选薯条"></div>
+      <button class="primary-action" type="submit" disabled>就选这一根 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></button>
+      <p class="quote">“合适的开始，就是最好的进步。”</p>
+      <p class="status" id="status" role="status">正在准备小薯条…</p>
+    </form>
+  </main>
+</body>
+</html>

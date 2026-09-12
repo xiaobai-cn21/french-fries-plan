@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>薯条组件 · 接入示例</title>
+<style>
+  body {
+    margin: 0; min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center;
+    background: radial-gradient(circle at 50% 18%, #FFF9EC, #FFEFD2 72%);
+    font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    color: #4A2F13;
+  }
+  h1 { font-size: 26px; letter-spacing: 4px; margin: 28px 0 6px; }
+  #status { margin: 0 0 16px; font-size: 14px; color: #9A7440; min-height: 1.4em; }
+  /* 容器宽度即薯条盒大小，可随意约束 */
+  #fries-box { width: min(86vw, 400px); }
+  code { background: #fff3d6; padding: 2px 6px; border-radius: 4px; }
+</style>
+</head>
+<body>
+<h1>🍟 薯条盒组件 Demo</h1>
+<p id="status">把鼠标移到任意一根薯条上</p>
+
+<div id="fries-box"></div>
+
+<script src="fries-hover.js"></script>
+<script>
+  (function () {
+    var status = document.getElementById('status');
+    var HINT = status.textContent;
+
+    FriesHover.mount('#fries-box', {
+      onHover: function (fryId) {
+        status.textContent = fryId ? '第 ' + fryId + ' 根薯条' : HINT;
+      }
+    }).then(function (api) {
+      // 视觉回归：demo.html?hover=N 强制第 N 根进入悬停态
+      var q = +new URLSearchParams(location.search).get('hover');
+      if (q) api.setActive(q);
+    });
+  })();
+</script>
+</body>
+</html>

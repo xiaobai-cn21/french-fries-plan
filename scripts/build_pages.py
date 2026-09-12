@@ -21,6 +21,20 @@ def make_writable(path: str) -> None:
     os.chmod(path, stat.S_IWRITE)
 
 
+def make_site_readable(path: Path) -> None:
+    if path.is_dir():
+        os.chmod(path, 0o755)
+    else:
+        os.chmod(path, 0o644)
+
+
+def normalize_permissions(path: Path) -> None:
+    make_site_readable(path)
+    if path.is_dir():
+        for child in path.rglob("*"):
+            make_site_readable(child)
+
+
 def remove_tree(path: Path) -> None:
     for child in path.rglob("*"):
         if child.is_file():
@@ -40,7 +54,7 @@ def copy_path(relative_path: str) -> None:
     else:
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(source, target)
-        make_writable(str(target))
+    normalize_permissions(target)
 
 
 def main() -> None:

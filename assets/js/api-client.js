@@ -1,5 +1,5 @@
 window.FryPlanApi = (() => {
-  const DEFAULT_LOCAL_API = 'http://127.0.0.1:3001';
+  const DEFAULT_LOCAL_API = 'http://47.100.48.22:3001';
 
   const backendBase = () => (
     window.FRYPLAN_API_BASE ||

@@ -21,7 +21,8 @@ class TaskCarton extends HTMLElement {
     this.shadowRoot.innerHTML = `<style>
       :host{display:block;width:100%;color:#956f42;font-family:inherit}
       *{box-sizing:border-box}
-      .scene{position:relative;width:100%;max-width:350px;aspect-ratio:396/502;margin:auto;isolation:isolate;touch-action:manipulation}
+      .scene{position:relative;width:min(100%,var(--carton-max,350px));aspect-ratio:var(--carton-ratio,396/502);margin:auto;isolation:isolate;touch-action:manipulation}
+      .scene.empty{--carton-ratio:396/340}
       .carton,.pick,.pick img{position:absolute;inset:0;width:100%;height:100%}
       .carton{pointer-events:none}.back{z-index:0}.front{z-index:1}
       .pick{padding:0;border:0;background:none;pointer-events:none;z-index:2;outline:none}
@@ -29,15 +30,16 @@ class TaskCarton extends HTMLElement {
       .pick.active,.pick:focus-visible{z-index:3}
       .pick.active img,.pick:focus-visible img{transform:translateY(-6px) scale(1.08);filter:drop-shadow(0 0 3px #ffd250) drop-shadow(0 0 12px #ffaa1ed9)}
       .scene.over{cursor:pointer}
-      .pagination{display:flex;justify-content:center;align-items:center;gap:22px;margin-top:4px;font-size:12px}
+      .pagination{display:flex;justify-content:center;align-items:center;gap:18px;margin-top:2px;font-size:12px}
       .pagination span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
-      .pagination button{border:1px solid #e8d3b6;border-radius:50%;height:44px;width:44px;background:#fff9ed;color:#97682f;font:inherit;cursor:pointer}
+      .pagination button{border:1px solid #e8d3b6;border-radius:50%;height:40px;width:40px;background:#fff9ed;color:#97682f;font:inherit;cursor:pointer}
+      @media(max-width:430px){.scene{width:min(100%,var(--carton-max-mobile,var(--carton-max,350px)))}.pagination button{height:34px;width:34px}}
       .pagination button:disabled{opacity:.3;cursor:default}.pagination button:focus-visible{outline:2px solid #ba752c;outline-offset:3px}
       .pagination[hidden]{display:none}
       @media(prefers-reduced-motion:reduce){.pick img{transition:none;transform:none!important}}
-    </style><div class="scene">
-      ${count < CARTON_CAPACITY ? '<svg class="carton back" viewBox="0 0 396 502" aria-hidden="true"><path d="M39 211Q194 166 367 211L342 293H62Z" fill="#b92316"/><ellipse cx="203" cy="219" rx="149" ry="30" fill="#831d13"/></svg>' : ''}
-      <svg class="carton front" viewBox="0 0 396 502" aria-hidden="true">
+    </style><div class="scene ${count ? '' : 'empty'}">
+      ${count < CARTON_CAPACITY ? `<svg class="carton back" viewBox="${count ? '0 0 396 502' : '0 162 396 340'}" aria-hidden="true"><path d="M39 211Q194 166 367 211L342 293H62Z" fill="#b92316"/><ellipse cx="203" cy="219" rx="149" ry="30" fill="#831d13"/></svg>` : ''}
+      <svg class="carton front" viewBox="${count ? '0 0 396 502' : '0 162 396 340'}" aria-hidden="true">
         <defs><clipPath id="carton-front"><path d="M37 207C81 232 118 285 198 289C277 290 325 241 370 207L350 378L326 487L246 502L117 500L81 482L51 350Z"/></clipPath></defs>
         <image href="${cartonAssets}carton-source.png" width="396" height="502" ${count < CARTON_CAPACITY ? 'clip-path="url(#carton-front)"' : ''}/>
       </svg>

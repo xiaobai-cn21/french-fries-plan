@@ -66,6 +66,8 @@ async function refreshTasks(){
     document.querySelector('#task-guidance').textContent=homeTasks.length?'随手抽一根，看看这次的小任务。':'还没有任务，从下方「目标」入口开始吧。';
     document.querySelector('#task-error').textContent='';
   }catch{
+    try{document.querySelector('#task-carton').setTasks([]);}catch{}
+    document.querySelector('#task-count').textContent='我的薯条盒 · 0 根';
     document.querySelector('#task-guidance').textContent='暂时无法打开薯条盒。';
     document.querySelector('#task-error').textContent='请检查浏览器存储权限后刷新重试，已保存的任务不会被清除。';
   }

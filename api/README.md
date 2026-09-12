@@ -1,8 +1,31 @@
 # 简单任务拆解 API
 
-本地 Node.js API。参考 Magic ToDo 的任务拆解交互，使用自己的提示词；不是其私有模型或提示词的复制。
+本地 API。参考 Magic ToDo 的任务拆解交互，使用自己的提示词；不是其私有模型或提示词的复制。现在同时包含 Node.js 版本和 Python 版本；GitHub Pages 前端只需要能访问同样的 `/api/...` 路由。
 
-## 启动
+## Python 启动
+
+Python 版本使用标准库，不需要安装依赖。从 `api/` 目录运行：
+
+```powershell
+$env:DEEPSEEK_API_KEY="your-api-key"
+$env:DEEPSEEK_MODEL="deepseek-flash"
+$env:DEEPSEEK_VISION_MODEL="deepseek-flash"
+python server.py
+```
+
+服务器平台上设置同样的环境变量，并使用启动命令：
+
+```sh
+python server.py
+```
+
+Python API 默认监听 `0.0.0.0:$PORT`，未设置 `PORT` 时使用 `3001`。部署后，在网站浏览器控制台设置你的公网 API 地址：
+
+```js
+localStorage.setItem('fryplan-api-base', 'https://your-python-api.example')
+```
+
+## Node.js 启动
 
 需要 Node.js 22.17+ 或 24+，无需安装依赖。从项目根目录运行：
 

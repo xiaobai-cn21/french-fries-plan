@@ -30,13 +30,21 @@ This repo includes a GitHub Actions Pages workflow at `.github/workflows/pages.y
 
 In the GitHub repository, go to **Settings -> Pages -> Build and deployment**, then set **Source** to **GitHub Actions**. Push to `main`, or run the workflow manually from the **Actions** tab.
 
-Deploy the API folder to a Node host such as Render, Railway, Fly.io, or another server, set `DEEPSEEK_API_KEY`, `DEEPSEEK_MODEL`, and `DEEPSEEK_VISION_MODEL` there, then point the GitHub Pages frontend to that public API URL:
+Deploy the `api/` folder to a Python or Node host such as Render, Railway, Fly.io, or another server, set `DEEPSEEK_API_KEY`, `DEEPSEEK_MODEL`, and `DEEPSEEK_VISION_MODEL` there, then point the GitHub Pages frontend to that public API URL:
 
 ```js
 localStorage.setItem('fryplan-api-base', 'https://your-api-domain.example')
 ```
 
 The public API must serve the same three frontend routes: `/api/estimate-time`, `/api/start-fries`, and `/api/verify-photo`. The server already sends permissive CORS headers for GitHub Pages.
+
+For the Python server, deploy `api/server.py` and `api/deepseek_client.py`, then start it with:
+
+```sh
+python server.py
+```
+
+The Python server reads `DEEPSEEK_API_KEY`, `DEEPSEEK_MODEL`, `DEEPSEEK_VISION_MODEL`, and `PORT` from server environment variables.
 
 ## Folder structure
 

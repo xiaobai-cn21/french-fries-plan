@@ -1,0 +1,2 @@
+# The Python API uses only the Python standard library.
+# Keep this file for hosts that expect a requirements.txt.

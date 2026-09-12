@@ -1,28 +1,30 @@
 import json
+import os
 import time
 import urllib.error
 import urllib.request
 
 
 DEEPSEEK_URL = "https://api.deepseek.com/chat/completions"
-DEEPSEEK_API_KEY = "your-api-key"
-DEEPSEEK_MODEL = "deepseek-flash"
-DEEPSEEK_VISION_MODEL = "deepseek-flash"
 
 
 def require_api_key():
-    api_key = DEEPSEEK_API_KEY.strip()
-    if not api_key or api_key == "your-api-key":
-        raise RuntimeError("Missing DeepSeek API key. Paste it into DEEPSEEK_API_KEY in api/deepseek_client.py.")
+    api_key = os.environ.get("DEEPSEEK_API_KEY", "").strip()
+    if not api_key:
+        raise RuntimeError("Missing DEEPSEEK_API_KEY on the server.")
     return api_key
 
 
 def text_model():
-    return DEEPSEEK_MODEL.strip() or "deepseek-flash"
+    return os.environ.get("DEEPSEEK_MODEL", "deepseek-flash").strip() or "deepseek-flash"
 
 
 def vision_model():
-    return (DEEPSEEK_VISION_MODEL or DEEPSEEK_MODEL or "deepseek-flash").strip()
+    return (
+        os.environ.get("DEEPSEEK_VISION_MODEL")
+        or os.environ.get("DEEPSEEK_MODEL")
+        or "deepseek-flash"
+    ).strip()
 
 
 def call_deepseek(messages, model=None, temperature=0.1, timeout=90, json_mode=True):
